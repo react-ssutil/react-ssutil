@@ -45,11 +45,11 @@ jobs:
             const prTitle = context.payload.pull_request.title;
 
             // Extract version bump type
-            const versionMatch = body.match(/###\s*Version bump[\s\S]*?```\s*(patch|minor|major)\s*```/i);
+            const versionMatch = body.match(/###\s*(?:Version bump|버전 업 유형)[\s\S]*?```\s*(patch|minor|major)\s*```/i);
             const bumpType = versionMatch ? versionMatch[1].trim().toLowerCase() : 'patch';
 
             // Extract changelog entries
-            const changelogMatch = body.match(/###\s*Changelog\s*\n([\s\S]*?)(?=\n##|$)/i);
+            const changelogMatch = body.match(/###\s*(?:Changelog|변경 내용)\s*\n([\s\S]*?)(?=\n##|$)/i);
             let changelogRaw = changelogMatch ? changelogMatch[1].trim() : '';
 
             // Filter out HTML comments and empty lines
