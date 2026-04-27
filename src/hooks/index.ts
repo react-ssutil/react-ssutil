@@ -5,3 +5,4 @@ export { useBoolean } from "./useBoolean";
 export { usePrevious } from "./usePrevious";
 export { useOutsideClick } from "./useOutsideClick";
 export { useMediaQuery } from "./useMediaQuery";
+export { useWindowSize } from "./useWindowSize";
