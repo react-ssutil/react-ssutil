@@ -6,4 +6,5 @@ export {
   usePrevious,
   useOutsideClick,
   useMediaQuery,
+  useWindowSize,
 } from "./hooks";
