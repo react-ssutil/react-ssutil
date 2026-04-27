@@ -1,0 +1,37 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# build output
+dist
+
+# test coverage
+coverage
+
+# env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# vite cache
+.vite
+playground/dist
