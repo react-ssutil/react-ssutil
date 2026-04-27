@@ -1,5 +1,5 @@
-name: 💡 Feature Request
-description: Suggest a new hook or feature.
+name: 💡 기능 제안
+description: 새로운 훅이나 기능을 제안해주세요.
 title: "[Feature]: "
 labels: ["enhancement"]
 
@@ -7,33 +7,33 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting an idea!
+        새로운 아이디어를 제안해주셔서 감사합니다!
 
   - type: checkboxes
     id: checklist
     attributes:
-      label: Pre-flight checklist
+      label: 사전 확인
       options:
-        - label: I have searched existing issues and found no duplicate.
+        - label: 기존 이슈에서 동일한 요청을 검색했습니다.
           required: true
 
   - type: textarea
     id: motivation
     attributes:
-      label: Motivation
-      description: What problem are you trying to solve?
-      placeholder: "When I do X, it's annoying because..."
+      label: 동기 / 문제 상황
+      description: 어떤 문제를 해결하고 싶으신가요?
+      placeholder: "~할 때 ~가 불편해서..."
     validations:
       required: true
 
   - type: textarea
     id: proposal
     attributes:
-      label: Proposed API
-      description: Describe the hook or feature you'd like.
+      label: 제안 API
+      description: 원하는 훅이나 기능을 설명해주세요.
       render: tsx
       placeholder: |
-        // example usage
+        // 사용 예시
         const { x, y } = useMousePosition();
     validations:
       required: true
@@ -41,5 +41,5 @@ body:
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives considered
-      description: How are you currently working around this?
+      label: 현재 해결 방법
+      description: 지금은 어떤 방법으로 해결하고 계신가요?
