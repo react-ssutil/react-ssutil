@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.4] - 2026-04-27
+
+> PR #4 — [FIX] v.0.0.3 -> v.0.0.4
+
+- release workflow 파싱 버그 수정
+  : changelog에 백틱, 따옴표 등 특수문자 포함 시 GitHub Actions 스크립트 구문 에러 발생하던 문제 수정
+  : 동적 값을 env 블록으로 분리하여 process.env / os.environ으로 안전하게 읽도록 개선
+
+---
+
 ## [$VERSION] - $DATE
 
 > PR #$PR_NUMBER — $PR_TITLE
