@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from 'react';
 
 /**
  * 함수 호출을 지연시키는 debounce 훅
@@ -14,7 +14,7 @@ import { useEffect, useRef, useCallback } from "react";
  */
 export function useDebounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
   fn: T,
-  delay: number = 300
+  delay: number = 300,
 ): (...args: Parameters<T>) => void {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fnRef = useRef<T>(fn);
@@ -33,7 +33,7 @@ export function useDebounce<T extends (...args: Parameters<T>) => ReturnType<T>>
         timerRef.current = null;
       }, delay);
     },
-    [delay]
+    [delay],
   );
 
   useEffect(() => {
