@@ -15,6 +15,14 @@ $CHANGELOG
 
 ---
 
+## [$VERSION] - $DATE
+
+> PR #$PR_NUMBER — $PR_TITLE
+
+$CHANGELOG
+
+---
+
 ## [0.0.1] - 2026-04-27
 
 ### Added
