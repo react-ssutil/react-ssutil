@@ -1,26 +1,22 @@
-## 개요
+## Summary
 
-<!-- 이 PR이 무엇을 하는지 간략하게 설명해주세요. -->
+<!-- Briefly describe what this PR does. -->
 
-## 관련 이슈
+## Related issue
 
-<!-- 관련 이슈가 있다면 연결해주세요. -->
+<!-- Link any related issues. -->
 - Closes #
 
-## 변경 사항
+## Type of change
 
-<!-- 구체적인 변경 내용을 설명해주세요. -->
+- [ ] New hook
+- [ ] Bug fix
+- [ ] Existing hook update
+- [ ] Tests
+- [ ] Docs
+- [ ] Config / tooling
 
-- [ ] 새로운 훅 추가
-- [ ] 기존 훅 수정
-- [ ] 버그 수정
-- [ ] 테스트 추가/수정
-- [ ] 문서 수정
-- [ ] 설정 변경
-
-## 변경된 훅
-
-<!-- 추가하거나 수정한 훅이 있다면 체크해주세요. -->
+## Affected hooks
 
 - [ ] `useDebounce`
 - [ ] `useThrottle`
@@ -29,21 +25,20 @@
 - [ ] `useLocalStorage`
 - [ ] `useOutsideClick`
 - [ ] `useMediaQuery`
-- [ ] 신규: `use___`
+- [ ] New: `use___`
 
-## 체크리스트
+## Checklist
 
-- [ ] 테스트를 작성했습니다.
-- [ ] `pnpm test` 통과를 확인했습니다.
-- [ ] `pnpm lint` (타입 체크) 통과를 확인했습니다.
-- [ ] `pnpm build` 통과를 확인했습니다.
-- [ ] 새로운 훅을 추가한 경우 `src/hooks/index.ts`와 `src/index.ts`에 export를 추가했습니다.
-- [ ] Breaking Change가 있는 경우 아래에 명시했습니다.
+- [ ] Tests written and passing (`pnpm test`)
+- [ ] Type check passing (`pnpm lint`)
+- [ ] Build passing (`pnpm build`)
+- [ ] New hook exported in `src/hooks/index.ts` and `src/index.ts`
+- [ ] Breaking changes documented below (if any)
 
-## Breaking Change
+## Breaking changes
 
-<!-- Breaking Change가 있다면 설명해주세요. 없으면 삭제하세요. -->
+<!-- Describe any breaking changes here. Remove this section if not applicable. -->
 
-## 스크린샷 / 추가 정보
+## Screenshots / additional context
 
-<!-- 필요한 경우 스크린샷이나 추가 정보를 첨부해주세요. -->
+<!-- Attach screenshots or extra info if needed. -->
