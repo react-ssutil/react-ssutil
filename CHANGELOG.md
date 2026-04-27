@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.0] - 2026-04-27
+
+> PR #7 — [FEAT] v.0.0.4 -> v.0.1.0
+
+- useIntersectionObserver 훅 추가
+
+---
+
 ## [0.0.4] - 2026-04-27
 
 > PR #4 — [FIX] v.0.0.3 -> v.0.0.4
