@@ -1,0 +1,106 @@
+name: 🐛 Bug Report
+description: 버그를 발견하셨나요? 알려주세요.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        버그 리포트를 작성해주셔서 감사합니다!
+        최대한 자세히 작성해주시면 빠르게 해결하는 데 도움이 됩니다.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 사전 확인
+      options:
+        - label: 최신 버전을 사용하고 있습니다.
+          required: true
+        - label: 기존 이슈에서 동일한 버그를 검색했습니다.
+          required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: react-ssutil 버전
+      placeholder: "예: 0.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: hook
+    attributes:
+      label: 관련 훅
+      multiple: true
+      options:
+        - useDebounce
+        - useThrottle
+        - useBoolean
+        - usePrevious
+        - useLocalStorage
+        - useOutsideClick
+        - useMediaQuery
+        - 기타
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 버그 설명
+      description: 어떤 문제가 발생했는지 명확하게 설명해주세요.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 재현 방법
+      description: 버그를 재현할 수 있는 최소한의 코드를 작성해주세요.
+      render: tsx
+      placeholder: |
+        import { useDebounce } from 'react-ssutil';
+
+        function Example() {
+          const debounced = useDebounce(() => {
+            // ...
+          }, 300);
+          // ...
+        }
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 예상 동작
+      description: 어떻게 동작해야 한다고 생각하시나요?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 동작
+      description: 실제로는 어떻게 동작하나요?
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 환경 정보
+      description: 사용 중인 환경을 알려주세요.
+      placeholder: |
+        - OS: macOS 14 / Windows 11 / Ubuntu 22.04
+        - Node.js: 20.x
+        - React: 18.x
+        - Framework: Next.js 14 / Vite+React / ...
+        - 브라우저: Chrome 123
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 추가 정보
+      description: 스크린샷, 에러 로그 등 추가 정보가 있으면 첨부해주세요.
