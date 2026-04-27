@@ -7,4 +7,5 @@ export {
   useOutsideClick,
   useMediaQuery,
   useWindowSize,
+  useIntersectionObserver,
 } from "./hooks";
