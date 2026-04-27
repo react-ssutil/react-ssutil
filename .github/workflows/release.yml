@@ -98,44 +98,36 @@ jobs:
           echo "Version bumped: ${CURRENT} → ${NEXT}"
 
       - name: Update CHANGELOG.md
+        env:
+          VERSION: ${{ steps.version.outputs.next }}
+          PR_NUMBER: ${{ steps.parse.outputs.pr_number }}
+          PR_TITLE: ${{ steps.parse.outputs.pr_title }}
+          CHANGELOG: ${{ steps.parse.outputs.changelog }}
         run: |
-          VERSION="${{ steps.version.outputs.next }}"
           DATE=$(date +%Y-%m-%d)
-          PR_NUMBER="${{ steps.parse.outputs.pr_number }}"
-          PR_TITLE="${{ steps.parse.outputs.pr_title }}"
-          CHANGELOG="${{ steps.parse.outputs.changelog }}"
 
-          NEW_ENTRY="## [${VERSION}] - ${DATE}
-
-          > PR #${PR_NUMBER} — ${PR_TITLE}
-
-          ${CHANGELOG}
-          "
-
-          # Prepend new entry after the header block
           python3 - <<'PYEOF'
-          import re
+          import os
 
           with open('CHANGELOG.md', 'r') as f:
               content = f.read()
 
-          version = "$VERSION"
-          date = "$DATE"
-          pr_number = "$PR_NUMBER"
-          pr_title = "$PR_TITLE"
-          changelog = """$CHANGELOG"""
+          version = os.environ['VERSION']
+          date = os.environ.get('DATE', '')
+          pr_number = os.environ['PR_NUMBER']
+          pr_title = os.environ['PR_TITLE']
+          changelog = os.environ['CHANGELOG']
 
-          new_entry = f"""## [{version}] - {date}
+          import subprocess
+          date = subprocess.check_output(['date', '+%Y-%m-%d']).decode().strip()
 
-          > PR #{pr_number} — {pr_title}
+          new_entry = (
+              f"## [{version}] - {date}\n\n"
+              f"> PR #{pr_number} — {pr_title}\n\n"
+              f"{changelog}\n\n"
+              f"---\n\n"
+          )
 
-          {changelog}
-
-          ---
-
-          """
-
-          # Insert after the header (first --- separator)
           if '---' in content:
               parts = content.split('---\n', 1)
               updated = parts[0] + '---\n\n' + new_entry + parts[1].lstrip()
@@ -158,22 +150,31 @@ jobs:
 
       - name: Create GitHub Release
         uses: actions/github-script@v7
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.next }}
+          RELEASE_PR_NUMBER: ${{ steps.parse.outputs.pr_number }}
+          RELEASE_PR_TITLE: ${{ steps.parse.outputs.pr_title }}
+          RELEASE_CHANGELOG: ${{ steps.parse.outputs.changelog }}
+          RELEASE_REPO: ${{ github.repository }}
         with:
           script: |
-            const version = '${{ steps.version.outputs.next }}';
-            const prNumber = ${{ steps.parse.outputs.pr_number }};
-            const prTitle = `${{ steps.parse.outputs.pr_title }}`;
-            const changelog = `${{ steps.parse.outputs.changelog }}`;
+            const version = process.env.RELEASE_VERSION;
+            const prNumber = process.env.RELEASE_PR_NUMBER;
+            const prTitle = process.env.RELEASE_PR_TITLE;
+            const changelog = process.env.RELEASE_CHANGELOG;
+            const repo = process.env.RELEASE_REPO;
 
-            const body = `## What's Changed
-
-            > PR #${prNumber} — ${prTitle}
-
-            ${changelog}
-
-            ---
-
-            **Full Changelog**: https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md`;
+            const body = [
+              '## What\'s Changed',
+              '',
+              `> PR #${prNumber} — ${prTitle}`,
+              '',
+              changelog,
+              '',
+              '---',
+              '',
+              `**Full Changelog**: https://github.com/${repo}/blob/main/CHANGELOG.md`,
+            ].join('\n');
 
             await github.rest.repos.createRelease({
               owner: context.repo.owner,
