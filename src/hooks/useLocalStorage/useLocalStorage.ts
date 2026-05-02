@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from 'react';
 
 type SetValue<T> = (value: T | ((prev: T) => T)) => void;
 
@@ -12,12 +12,9 @@ type SetValue<T> = (value: T | ((prev: T) => T)) => void;
  * @example
  * const [theme, setTheme, removeTheme] = useLocalStorage("theme", "light");
  */
-export function useLocalStorage<T>(
-  key: string,
-  initialValue: T
-): [T, SetValue<T>, () => void] {
+export function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>, () => void] {
   const readValue = useCallback((): T => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return initialValue;
     }
     try {
@@ -32,32 +29,30 @@ export function useLocalStorage<T>(
 
   const setValue: SetValue<T> = useCallback(
     (value) => {
-      if (typeof window === "undefined") {
+      if (typeof window === 'undefined') {
         return;
       }
       try {
         const nextValue =
-          typeof value === "function"
-            ? (value as (prev: T) => T)(storedValue)
-            : value;
+          typeof value === 'function' ? (value as (prev: T) => T)(storedValue) : value;
         window.localStorage.setItem(key, JSON.stringify(nextValue));
         setStoredValue(nextValue);
-        window.dispatchEvent(new Event("local-storage"));
+        window.dispatchEvent(new Event('local-storage'));
       } catch {
         // do nothing
       }
     },
-    [key, storedValue]
+    [key, storedValue],
   );
 
   const removeValue = useCallback(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return;
     }
     try {
       window.localStorage.removeItem(key);
       setStoredValue(initialValue);
-      window.dispatchEvent(new Event("local-storage"));
+      window.dispatchEvent(new Event('local-storage'));
     } catch {
       // do nothing
     }
@@ -71,11 +66,11 @@ export function useLocalStorage<T>(
     const handleStorageChange = () => {
       setStoredValue(readValue());
     };
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("local-storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('local-storage', handleStorageChange);
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("local-storage", handleStorageChange);
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('local-storage', handleStorageChange);
     };
   }, [readValue]);
 
