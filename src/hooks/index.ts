@@ -7,3 +7,4 @@ export { useOutsideClick } from "./useOutsideClick";
 export { useMediaQuery } from "./useMediaQuery";
 export { useWindowSize } from "./useWindowSize";
 export { useIntersectionObserver } from "./useIntersectionObserver";
+export {useDDay} from "./useDDay";
