@@ -8,4 +8,5 @@ export {
   useMediaQuery,
   useWindowSize,
   useIntersectionObserver,
+  useCopyToClipboard,
 } from "./hooks";
