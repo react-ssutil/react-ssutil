@@ -30,6 +30,7 @@ yarn add react-ssutil
 | `useLocalStorage` | localStorage 동기화 상태 |
 | `useOutsideClick` | 외부 클릭 감지 |
 | `useMediaQuery` | CSS 미디어 쿼리 매칭 |
+| `useQueryState` | URL query string과 React state 동기화 |
 
 ## 사용법
 
@@ -151,6 +152,29 @@ function ResponsiveLayout() {
 }
 ```
 
+### useQueryState
+
+```tsx
+import { useQueryState } from "react-ssutil";
+
+function ProductList() {
+  const [page, setPage] = useQueryState("page", 1, {
+    parse: (value) => Number(value || 1),
+    serialize: (value) => String(value),
+  });
+  const [sort, setSort] = useQueryState("sort", "latest");
+
+  return (
+    <>
+      <button onClick={() => setSort("price")}>가격순</button>
+      <button onClick={() => setPage((prev) => prev + 1)}>다음 페이지</button>
+      <div>현재 페이지: {page}</div>
+      <div>정렬 기준: {sort}</div>
+    </>
+  );
+}
+```
+
 ## 개발 환경 실행
 
 ```bash
@@ -186,6 +210,7 @@ react-ssutil/
 │   │   ├── useLocalStorage/
 │   │   ├── useOutsideClick/
 │   │   ├── useMediaQuery/
+│   │   ├── useQueryState/
 │   │   └── index.ts
 │   └── index.ts
 ├── playground/          # React+TS 개발/테스트 환경
