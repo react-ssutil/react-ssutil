@@ -8,8 +8,5 @@ export {
   useMediaQuery,
   useWindowSize,
   useIntersectionObserver,
-  useMobile,
-  DEFAULT_MOBILE_BREAKPOINTS,
-  type MobileBreakpointKind,
-  type UseMobileOptions,
+  useIsMobile,
 } from "./hooks";
