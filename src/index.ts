@@ -8,4 +8,6 @@ export {
   useMediaQuery,
   useWindowSize,
   useIntersectionObserver,
+  useQueryState,
 } from "./hooks";
+export type { UseQueryStateOptions } from "./hooks";
