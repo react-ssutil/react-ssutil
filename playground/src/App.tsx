@@ -6,6 +6,7 @@ import {
   usePrevious,
   useMediaQuery,
   useLocalStorage,
+  useCopyToClipboard,
 } from "react-ssutil";
 
 const styles = {
@@ -240,6 +241,40 @@ function LocalStorageDemo() {
   );
 }
 
+function CopyToClipboardDemo() {
+  const [input, setInput] = useState("복사할 텍스트를 입력하세요");
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const { copy } = useCopyToClipboard({
+    onSuccess: () => setStatus("success"),
+    onError: () => setStatus("error"),
+  });
+
+  const handleCopy = useCallback(async () => {
+    setStatus("idle");
+    await copy(input);
+  }, [copy, input]);
+
+  return (
+    <div style={styles.section}>
+      <div style={styles.sectionTitle}>useCopyToClipboard</div>
+      <div style={styles.row}>
+        <input
+          style={{ ...styles.input, marginBottom: 0, flex: 1 }}
+          value={input}
+          onChange={(e) => { setInput(e.target.value); setStatus("idle"); }}
+        />
+        <button style={styles.button} onClick={handleCopy}>복사</button>
+      </div>
+      {status !== "idle" && (
+        <div style={{ ...styles.log, marginTop: 12, color: status === "success" ? "#4ade80" : "#ef4444" }}>
+          {status === "success" ? "클립보드에 복사되었습니다" : "복사에 실패했습니다"}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <div style={styles.app}>
@@ -255,6 +290,7 @@ export default function App() {
       <PreviousDemo />
       <MediaQueryDemo />
       <LocalStorageDemo />
+      <CopyToClipboardDemo />
     </div>
   );
 }
